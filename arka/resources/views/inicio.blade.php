@@ -28,8 +28,6 @@
             <li><x-dropdown-link :href="route('profile.edit')">
                 {{ __('Configuración') }}
             </x-dropdown-link></></li>
-            <li><a href="#comentario">Comentario</a></li>
-            <li><a href="#notificacion">Notificación</a></li>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <a href="{{ route('logout') }}" class="text-black" role="menuitem" onclick="event.preventDefault(); this.closest('form').submit();">

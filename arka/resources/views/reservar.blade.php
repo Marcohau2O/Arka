@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Productos Esteticos</title>
+        <title>Reserva</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -16,28 +16,16 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
         />
-        <link rel="stylesheet" href="{{asset('assets/productos.css')}}">
     </head>
 
     <body>
-        <nav>
-            <ul class="navbar">
-                <li><img src="your-logo.png" alt="Logo" class="logo"></li>
-                <li><a href="{{route('inicio')}}">Regresar a Inicio</a></li>
-            </ul>
-        </nav>
-        <div class="card-container">
-          @foreach($productos as $producto)
-          <div class="card">
-              <img src="{{ asset('path/to/your/image/'.$producto->image) }}" class="card-img-top" alt="Product Image">
-              <div class="card__content">
-                  <p class="card__title">{{ $producto->title }}</p>
-                  <p class="card__description">{{ $producto->description }}</p>
-                  <p class="card__quantity">Costo: {{ $producto->quantity }}</p>
-              </div>
-          </div>
-          @endforeach
-      </div>
+        <header>
+            <!-- place navbar here -->
+        </header>
+        <main></main>
+        <footer>
+            <!-- place footer here -->
+        </footer>
         <!-- Bootstrap JavaScript Libraries -->
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

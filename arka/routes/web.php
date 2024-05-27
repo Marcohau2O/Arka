@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductoController;
 
 /*Route::get('/inicio', function () {
     return view('inicio');
@@ -27,8 +28,9 @@ Route::get('/serviciosM', function () {
 });
 Route::resource('productosM', ProductController::class);
 Route::get('/productosM', [ProductController::class, 'index'])->name('productosM');
-Route::get('/productosE', function () {
-    return view('productosE');
+Route::resource('/productosE', ProductoController::class);
+Route::get('/productosE', [ProductoController::class, 'index'])->name('productosE');
+Route::get('/Reservacion', function () {
+    return view('reservar');
 });
-
 require __DIR__.'/auth.php';

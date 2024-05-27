@@ -34,7 +34,7 @@
             <p class="card-body">
                 Nullam ac tristique nulla, at convallis quam. Integer consectetur mi nec magna tristique, non lobortis.
             </p>
-            <p><button class="button type1"><span class="btn-txt">Reservar</span></button></p>
+            <p><button class="button type1" data-bs-toggle="modal" data-bs-target="#reservarModal"><span class="btn-txt">Reservar</span></button></p>
         </div>
         <div class="card">
             <div class="card-image"></div>
@@ -42,17 +42,50 @@
             <p class="card-body">
                 Nullam ac tristique nulla, at convallis quam. Integer consectetur mi nec magna tristique, non lobortis.
             </p>
-            <p><button class="button type1"><span class="btn-txt">Reservar</span></button></p>        </div>
+            <p><button class="button type1" data-bs-toggle="modal" data-bs-target="#reservarModal"><span class="btn-txt">Reservar</span></button></p>
+         </div>
         <div class="card">
             <div class="card-image"></div>
             <p class="card-title">Radiografias</p>
             <p class="card-body">
                 Nullam ac tristique nulla, at convallis quam. Integer consectetur mi nec magna tristique, non lobortis.
             </p>
-            <p><button class="button type1"><span class="btn-txt">Reservar</span></button></p>
+            <p><button class="button type1" data-bs-toggle="modal" data-bs-target="#reservarModal"><span class="btn-txt">Reservar</span></button></p>
         </div>
         <!-- Add more cards as needed -->
     </div>
+    <!-- Modal -->
+  <div class="modal fade" id="reservarModal" tabindex="-1" aria-labelledby="reservarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="reservarModalLabel">Reservar Servicio</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Contenido del Modal -->
+          <form>
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="nombre" required>
+            </div>
+            <div class="mb-3">
+              <label for="date" class="form-label">date</label>
+              <input type="date" class="form-control" id="date" required>
+            </div>
+            <div class="mb-3">
+              <label for="telefono" class="form-label">Teléfono</label>
+              <input type="tel" class="form-control" id="telefono" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Reservar</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
         <!-- Bootstrap JavaScript Libraries -->
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

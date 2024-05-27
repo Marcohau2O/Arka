@@ -56,7 +56,7 @@
               class="input"
               required=""
             />
-              <input value="Registrase" type="submit" class="login-button" />
+              <input value="Registrase" type="submit" class="login-button" href="{{route('login')}}"/>
               <span class="forgot-password"><a href="{{route('login')}}">Ya Tienes Cuenta??</a></span>
             </form>
           

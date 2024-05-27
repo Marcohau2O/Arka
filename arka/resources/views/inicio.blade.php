@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Title</title>
+        <title>Inicios</title>
         <!-- Required meta tags -->
-        <meta charset="utf-8" />
+        <meta charset"utf-8" />
         <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -16,18 +16,80 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
         />
+        <link rel="stylesheet" href="{{asset('assets/nav.css')}}">
     </head>
 
     <body>
-        <header>
-            <!-- place navbar here -->
-        </header>
-        <main>
-            <h1>Hola Mundo</h1>
-        </main>
-        <footer>
-            <!-- place footer here -->
-        </footer>
+  <nav>
+        <ul class="navbar">
+            <li><img src="your-logo.png" alt="Logo" class="logo"></li>
+            <li><a href="#quienes-somos">¿Quienes Somos?</a></li>
+            <li><a href="#contactanos">Contactanos</a></li>
+            <li><x-dropdown-link :href="route('profile.edit')">
+                {{ __('Configuración') }}
+            </x-dropdown-link></></li>
+            <li><a href="#comentario">Comentario</a></li>
+            <li><a href="#notificacion">Notificación</a></li>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <a href="{{ route('logout') }}" class="text-black" role="menuitem" onclick="event.preventDefault(); this.closest('form').submit();">
+                    {{ __('Log Out') }}
+                </a>
+            </form>
+        </ul>
+    </nav>
+
+    <div class="card-container">
+        <div class="card">
+            <div class="card-image"></div>
+            <p class="card-title">Productos Esteticos</p>
+            <p class="card-body">
+                Nullam ac tristique nulla, at convallis quam. Integer consectetur mi nec magna tristique, non lobortis.
+            </p>
+            <p>
+                <button onclick="window.location.href='/productosE'" class="button type1">
+                    <span class="btn-txt">Más Información</span>
+                </button>
+            </p>
+        </div>
+        <div class="card">
+            <div class="card-image"></div>
+            <p class="card-title">Productos Medicinales</p>
+            <p class="card-body">
+                Nullam ac tristique nulla, at convallis quam. Integer consectetur mi nec magna tristique, non lobortis.
+            </p>
+            <p>
+                <button onclick="window.location.href='/productosM'" class="button type1">
+                    <span class="btn-txt">Más Información</span>
+                </button>
+            </p>        
+            </div>
+        <div class="card">
+            <div class="card-image"></div>
+            <p class="card-title">Serviciós Esteticos</p>
+            <p class="card-body">
+                Nullam ac tristique nulla, at convallis quam. Integer consectetur mi nec magna tristique, non lobortis.
+            </p>
+            <p>
+                <button onclick="window.location.href='/serviciosE'" class="button type1">
+                    <span class="btn-txt">Más Información</span>
+                </button>
+            </p>
+        </div>
+        <div class="card">
+            <div class="card-image"></div>
+            <p class="card-title">Serviciós Medicinales</p>
+            <p class="card-body">
+                Nullam ac tristique nulla, at convallis quam. Integer consectetur mi nec magna tristique, non lobortis.
+            </p>
+            <p>
+                <button onclick="window.location.href='/serviciosM'" class="button type1">
+                    <span class="btn-txt">Más Información</span>
+                </button>
+            </p>
+        </div>
+        <!-- Add more cards as needed -->
+    </div>
         <!-- Bootstrap JavaScript Libraries -->
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

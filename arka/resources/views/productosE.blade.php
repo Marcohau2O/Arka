@@ -17,13 +17,35 @@
             crossorigin="anonymous"
         />
         <link rel="stylesheet" href="{{asset('assets/productos.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/nav.css')}}">
     </head>
 
     <body>
         <nav>
             <ul class="navbar">
-                <li><img src="your-logo.png" alt="Logo" class="logo"></li>
-                <li><a href="{{route('inicio')}}">Regresar a Inicio</a></li>
+                <div aria-label="Orange and tan hamster running in a metal wheel" role="img" class="wheel-and-hamster">
+                    <div class="wheel"></div>
+                    <div class="hamster">
+                        <div class="hamster__body">
+                            <div class="hamster__head">
+                                <div class="hamster__ear"></div>
+                                <div class="hamster__eye"></div>
+                                <div class="hamster__nose"></div>
+                            </div>
+                            <div class="hamster__limb hamster__limb--fr"></div>
+                            <div class="hamster__limb hamster__limb--fl"></div>
+                            <div class="hamster__limb hamster__limb--br"></div>
+                            <div class="hamster__limb hamster__limb--bl"></div>
+                            <div class="hamster__tail"></div>
+                        </div>
+                    </div>
+                    <div class="spoke"></div>
+                </div>
+                <li>
+                    <form action="{{ route('inicio') }}">
+                        <button type="submit" class="btn">Regresar a Inicio</button>
+                    </form>
+                </li>            
             </ul>
         </nav>
         <div class="card-container">

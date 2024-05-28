@@ -22,18 +22,42 @@
     <body>
   <nav>
         <ul class="navbar">
-            <li><img src="your-logo.png" alt="Logo" class="logo"></li>
-            <li><a href="#quienes-somos">¿Quienes Somos?</a></li>
-            <li><a href="#contactanos">Contactanos</a></li>
-            <li><x-dropdown-link :href="route('profile.edit')">
-                {{ __('Configuración') }}
-            </x-dropdown-link></></li>
-            <form method="POST" action="{{ route('logout') }}">
+            <div aria-label="Orange and tan hamster running in a metal wheel" role="img" class="wheel-and-hamster">
+                <div class="wheel"></div>
+                <div class="hamster">
+                    <div class="hamster__body">
+                        <div class="hamster__head">
+                            <div class="hamster__ear"></div>
+                            <div class="hamster__eye"></div>
+                            <div class="hamster__nose"></div>
+                        </div>
+                        <div class="hamster__limb hamster__limb--fr"></div>
+                        <div class="hamster__limb hamster__limb--fl"></div>
+                        <div class="hamster__limb hamster__limb--br"></div>
+                        <div class="hamster__limb hamster__limb--bl"></div>
+                        <div class="hamster__tail"></div>
+                    </div>
+                </div>
+                <div class="spoke"></div>
+            </div>
+            <button class="btn"> Nosotros
+            </button>
+            <button class="btn"> Contactanos
+            </button>
+            <button class="btn" onclick="window.location.href='{{ route('profile.edit') }}'"> Configuración
+            </button>          
+            <button class="Btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <div class="sign">
+                    <svg viewBox="0 0 512 512">
+                        <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
+                    </svg>
+                </div>
+                <div class="text">Logout</div>
+            </button>
+            
+            <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
                 @csrf
-                <a href="{{ route('logout') }}" class="text-black" role="menuitem" onclick="event.preventDefault(); this.closest('form').submit();">
-                    {{ __('Log Out') }}
-                </a>
-            </form>
+            </form>                         
         </ul>
     </nav>
 

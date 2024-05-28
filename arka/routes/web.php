@@ -9,7 +9,7 @@ use App\Http\Controllers\ProductoController;
     return view('inicio');
 });*/
 
-Route::get('/inicio', function () {
+Route::get('/', function () {
     return view('inicio');
 })->middleware(['auth', 'verified'])->name('inicio');
 

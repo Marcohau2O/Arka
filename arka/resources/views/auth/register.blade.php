@@ -52,12 +52,11 @@
               placeholder="Password_confirmation"
               id="password_confirmation"
               name="password_confirmation"
-              type="password_confirmation"
+              type="password"
               class="input"
               required=""
             />
               <input value="Registrase" type="submit" class="login-button" href="{{route('login')}}"/>
-              <span class="forgot-password"><a href="{{route('login')}}">Ya Tienes Cuenta??</a></span>
             </form>
           
         <!-- Bootstrap JavaScript Libraries -->

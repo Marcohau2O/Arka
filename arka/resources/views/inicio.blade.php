@@ -40,10 +40,16 @@
                 </div>
                 <div class="spoke"></div>
             </div>
-            <button class="btn"> Nosotros
-            </button>
-            <button class="btn"> Contactanos
-            </button>
+            <li>
+                <form action="{{route('nosotros')}}">
+                    <button class="btn" type="submit">Nosotros</button>
+                </form>
+            </li>
+            <li>
+                <form action="{{route('contactanos')}}">
+                    <button class="btn" type="submit">Contactanos</button>
+                </form>
+            </li>
             <button class="btn" onclick="window.location.href='{{ route('profile.edit') }}'"> Configuración
             </button>          
             <button class="Btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Configuración</title>
+        <title>Nosotros</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -17,6 +17,7 @@
             crossorigin="anonymous"
         />
         <link rel="stylesheet" href="{{asset('assets/nav.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/nosotros.css')}}">
     </head>
 
     <body>
@@ -48,22 +49,33 @@
             </ul>
         </nav>
 
-        <div class="py-12 flex flex-col">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <div class="max-w-xl">
-                        @include('profile.partials.update-profile-information-form')
-                    </div>
-                </div>
-        
-                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <div class="max-w-xl">
-                        @include('profile.partials.update-password-form')
-                    </div>
-                </div>
+        <section id="nosotros">
+            <div class="container">
+                <h2>Nosotros</h2>
+                <p>Somos un equipo comprometido con la excelencia y la innovación...</p>
+                <!-- Puedes agregar más contenido aquí, como la misión, visión, valores, etc. -->
+                <h3>Nuestro Equipo</h3>
+                <ul>
+                    <li>Nombre del miembro 1 - Cargo</li>
+                    <li>Nombre del miembro 2 - Cargo</li>
+                    <!-- Agrega más miembros según sea necesario -->
+                </ul>
             </div>
-        </div>
-        
+            <div class="container">
+                <div class="cloud front">
+                  <span class="left-front"></span>
+                  <span class="right-front"></span>
+                </div>
+                <span class="sun sunshine"></span>
+                <span class="sun"></span>
+                <div class="cloud back">
+                  <span class="left-back"></span>
+                  <span class="right-back"></span>
+                </div>
+              </div>
+        </section>
+            <!-- Agrega más miembros según sea necesario -->
+        </section>
         <!-- Bootstrap JavaScript Libraries -->
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

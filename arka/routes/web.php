@@ -19,6 +19,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/Perfil', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::view('/contactanos', 'contactanos')->name('contactanos');
+Route::view('/nosotros', 'nosotros')->name('nosotros');
+
 Route::get('/serviciosE', function () {
     return view('serviciosE');
 });

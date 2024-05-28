@@ -40,8 +40,7 @@
                 class="input"
                 required=""
               />
-              <span class="forgot-password"><a href="#">Olvidaste tu contraseña</a></span>
-              <span class="forgot-password"><a href="{{route('register')}}">Resgistrase</a></span>
+              <span class="forgot-password"><a href="{{route('register')}}">Registrase</a></span>
               <input value="Sign In" type="submit" class="login-button" />
             </form>
           

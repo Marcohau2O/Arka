@@ -8,7 +8,7 @@ use App\Http\Controllers\ProductoController;
 /*Route::get('/inicio', function () {
     return view('inicio');
 });*/
-
+//Vista de User
 Route::get('/', function () {
     return view('inicio');
 })->middleware(['auth', 'verified'])->name('inicio');
@@ -29,11 +29,18 @@ Route::get('/serviciosE', function () {
 Route::get('/serviciosM', function () {
     return view('serviciosM');
 });
+//Vista de User Para los Productos de Medicinales
 Route::resource('productosM', ProductController::class);
 Route::get('/productosM', [ProductController::class, 'index'])->name('productosM');
+//Vista de User Para los Productos Esteticos
 Route::resource('/productosE', ProductoController::class);
 Route::get('/productosE', [ProductoController::class, 'index'])->name('productosE');
 Route::get('/Reservacion', function () {
     return view('reservar');
 });
+
+//Vista de admin Para los Crud de Productos Esteticos
+Route::resource('admin.productosEs', ProductoController::class);
+Route::get('admin/productosEs', [ProductoController::class, 'indexAlternative'])->name('productosEs.alternative');
+// Vista de admin Para los Crud de Productos Medicinales
 require __DIR__.'/auth.php';

@@ -14,4 +14,9 @@ class ProductoController extends Controller
         $productos = Producto::all();
         return view('productosE',compact('productos'));
     }
+    public function indexAlternative()
+    {
+        $productos = Producto::all();
+        return view('admin.productosEs', compact('productos'));
+    }
 }

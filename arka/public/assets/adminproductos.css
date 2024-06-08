@@ -1,0 +1,63 @@
+/*AGREGAR*/
+button.button1 {
+    border: 2px solid #11d200;
+    background-color: #11d200;
+    border-radius: 0.9em;
+    padding: 0.8em 1.2em 0.8em 1em;
+    transition: all ease-in-out 0.2s;
+    font-size: 16px;
+   }
+   
+   button span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 600;
+   }
+   
+   button:hover.button1 {
+    background-color: #0c8e01;
+   }
+/*Editar*/
+button.button2 {
+    border: 2px solid #0040c8;
+    background-color: #0040c8;
+    border-radius: 0.9em;
+    padding: 0.8em 1.2em 0.8em 1em;
+    transition: all ease-in-out 0.2s;
+    font-size: 16px;
+   }
+   
+   button span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 600;
+   }
+   
+   button:hover.button2 {
+    background-color: #033195;
+   }
+   /*Eliminar*/
+button.button3 {
+    border: 2px solid #c80000;
+    background-color: #c80000;
+    border-radius: 0.9em;
+    padding: 0.8em 1.2em 0.8em 1em;
+    transition: all ease-in-out 0.2s;
+    font-size: 16px;
+   }
+   
+   button span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 600;
+   }
+   
+   button:hover.button3 {
+    background-color: #9b0202;
+   }

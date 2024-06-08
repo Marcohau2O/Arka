@@ -43,12 +43,13 @@
                     <div class="spoke"></div>
                 </div>
                 <li>
-                    <form action="{{ route('inicio') }}">
+                    <form action="">
                         <button type="submit" class="btn">Regresar a Inicio</button>
                     </form>
                 </li>            
             </ul>
         </nav>
+        <form action="{{ route('admin.createProdEs') }}">
         <div class="container mx-auto px-4">
             <div class="flex justify-start">
         <button class="button1 py-2 px-4">
@@ -56,6 +57,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg> Agregar
             </span>
         </button>
+    </form>
         </div>
         </div>
         <div class="container mx-auto p-4">
@@ -75,24 +77,30 @@
                 @foreach($productos as $producto)
                 <tr>
                     <td class="px-4 py-2">
-                        <img src="{{ asset('path/to/your/image/'.$producto->image) }}" class="img-thumbnail w-24 h-auto" alt="Product Image" style="width: 100px;">
+                        <img src="{{ asset('public\Archivos'.$producto->image) }}" class="img-thumbnail w-24 h-auto" alt="Product Image" style="width: 100px;">
                     </td>
                     <td class="px-4 py-2">{{ $producto->title }}</td>
                     <td class="px-4 py-2">{{ $producto->description }}</td>
                     <td class="px-4 py-2">{{ $producto->quantity }}</td>
                     <td class="px-4 py-2">
+                        <form action="{{ route('admin.edit', $producto->id) }}">
                         <button class="button2 py-2 px-4">
                             <span class="span2 flex items-center space-x-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg> Editar
                             </span>
                         </button>
+                    </form>
                     </td>
                     <td class="px-4 py-2">
-                        <button class="button3 py-2 px-4">
+                        <form method="POST" action="{{ route('admin.destroy', $producto->id) }}" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
+                            @csrf
+                            @method('DELETE')
+                            <button class="button3 py-2 px-4">
                             <span class="span3 flex items-center space-x-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg> Eliminar
                             </span>
                         </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

@@ -51,27 +51,29 @@
         </nav>
 
         <!-- resources/views/admin/create.blade.php -->
-
-    <form method="POST" action="{{ Route('admin.store') }}" enctype="multipart/form-data">
-        @csrf
-        <div class="form-group">
-            <label for="title">Título:</label>
-            <input type="text" name="title" class="form-control" id="title">
-        </div>
-        <div class="form-group">
-            <label for="description">Descripción:</label>
-            <textarea name="description" class="form-control" id="description" rows="3"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="quantity">Cantidad:</label>
-            <input type="number" name="quantity" class="form-control" id="quantity">
-        </div>
-        <div class="form-group">
-            <label for="image">Imagen:</label>
-            <input type="file" name="image" class="form-control-file" id="image">
-        </div>
-        <button type="submit" class="btn btn-primary">Agregar Producto</button>
-    </form>
+        <form method="POST" action="{{ route('admin.edit', $producto->id) }}" enctype="multipart/form-data">
+            @csrf
+            @method('PUT') <!-- Utilizamos el método PUT para actualizar -->
+            <div class="form-group">
+                <label for="title">Título:</label>
+                <input type="text" name="title" class="form-control" id="title" value="{{ $producto->title }}">
+            </div>
+            <div class="form-group">
+                <label for="description">Descripción:</label>
+                <textarea name="description" class="form-control" id="description" rows="3">{{ $producto->description }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Cantidad:</label>
+                <input type="number" name="quantity" class="form-control" id="quantity" value="{{ $producto->quantity }}">
+            </div>
+            <div class="form-group">
+                <label for="image">Imagen:</label>
+                <input type="file" name="image" class="form-control-file" id="image">
+            </div>
+            <button type="submit" class="btn btn-primary">Actualizar Producto</button>
+        </form>
+        
+        
 
         <!-- Bootstrap JavaScript Libraries -->
         <script

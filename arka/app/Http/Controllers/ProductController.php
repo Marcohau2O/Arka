@@ -121,7 +121,7 @@ class ProductController extends Controller
 
             // Eliminar imagen si existe
             if (!empty($products->image)) {
-                Storage::delete('Archivos/' . $products->image);
+                Storage::delete('public/' . $products->image);
             }
 
             $products->delete();

@@ -78,7 +78,7 @@
                 @foreach($productos as $producto)
                 <tr>
                     <td class="px-4 py-2">
-                        <img src="{{ asset('public\Archivos'.$producto->image) }}" class="img-thumbnail w-24 h-auto" alt="Product Image" style="width: 100px;">
+                        <img src="{{ asset('storage').'/'.$producto->image }}" class="img-thumbnail w-24 h-auto" alt="Product Image" style="width: 100px;">
                     </td>
                     <td class="px-4 py-2">{{ $producto->title }}</td>
                     <td class="px-4 py-2">{{ $producto->description }}</td>

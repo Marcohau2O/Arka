@@ -70,6 +70,7 @@
             </div>
             <div class="form-group py-3 px-5">
                 <label for="image">Imagen:</label>
+                <img src="{{ asset('storage').'/'.$products->image }}" alt="" width="200">
                 <input type="file" name="image" class="form-control-file" id="image">
             </div>
             <button type="submit" class="btn btn-primary" id="EditarProductoBtn">Actualizar Producto</button>

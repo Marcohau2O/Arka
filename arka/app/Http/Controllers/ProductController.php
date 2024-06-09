@@ -44,11 +44,15 @@ class ProductController extends Controller
             $products->quantity = $request->input('quantity');
     
             if ($request->hasFile('image')) {
-                $archivo = $request->file('image');
-                $nombreArchivo = time() . '.' . $archivo->getClientOriginalExtension();
-                $archivo->move(public_path('Archivos'), $nombreArchivo);
-                $products->image = $nombreArchivo;
+            $products['image'] = $request->file('image')->store('uploads','public');
             }
+
+            // if ($request->hasFile('image')) {
+            //     $archivo = $request->file('image');
+            //     $nombreArchivo = time() . '.' . $archivo->getClientOriginalExtension();
+            //     $archivo->move(public_path('Archivos'), $nombreArchivo);
+            //     $products->image = $nombreArchivo;
+            // }
     
             $products->save();
     
@@ -79,17 +83,24 @@ class ProductController extends Controller
             DB::beginTransaction();
 
             $products = Product::findOrFail($id);
+
+            if ($request->hasFile('image')) {
+                Storage::delete('public/'.$products->image);
+                $products['image'] = $request->file('image')->store('uploads','public');
+                }
+
+            //$products = Product::findOrFail($id);
             $products->title = $request->input('title');
             $products->description = $request->input('description');
             $products->quantity = $request->input('quantity');
 
-            if ($request->hasFile('image')) {
-                // Si se proporciona una nueva imagen, la actualizamos
-                $archivo = $request->file('image');
-                $nombreArchivo = time() . '.' . $archivo->getClientOriginalExtension();
-                $archivo->move(public_path('Archivos'), $nombreArchivo);
-                $products->image = $nombreArchivo;
-            }
+            // if ($request->hasFile('image')) {
+            //     // Si se proporciona una nueva imagen, la actualizamos
+            //     $archivo = $request->file('image');
+            //     $nombreArchivo = time() . '.' . $archivo->getClientOriginalExtension();
+            //     $archivo->move(public_path('Archivos'), $nombreArchivo);
+            //     $products->image = $nombreArchivo;
+            // }
 
             $products->save();
 

@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="{{asset('assets/adminproductos.css')}}">
         <link rel="stylesheet" href="{{asset('assets/nav.css')}}">
         @vite('resources/css/app.css')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
 
     <body>
@@ -92,14 +93,18 @@
                     </form>
                     </td>
                     <td class="px-4 py-2">
-                        <form method="POST" action="{{ route('admin.destroy', $producto->id) }}" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
+                        <form method="POST" action="{{ route('admin.destroy', $producto->id) }}" id="EliminarProductoForm">
                             @csrf
                             @method('DELETE')
-                            <button class="button3 py-2 px-4">
-                            <span class="span3 flex items-center space-x-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg> Eliminar
-                            </span>
-                        </button>
+                            <button type="button" class="button3 py-2 px-4" id="EliminarProductoBtn">
+                                <span class="span3 flex items-center space-x-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                        <path fill="none" d="M0 0h24v24H0z"></path>
+                                        <path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path>
+                                    </svg> 
+                                    Eliminar
+                                </span>
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -109,6 +114,24 @@
         </div>
         </div>
         <!-- Bootstrap JavaScript Libraries -->
+        <script>
+            document.getElementById('EliminarProductoBtn').addEventListener('click', function() {
+                Swal.fire({
+                    title: '¿Estás seguro de que deseas eliminar este producto?',
+                    text: '¡No podrás revertir esto!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, ¡elimínalo!',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('EliminarProductoForm').submit();
+                    }
+                });
+            });
+        </script>
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
             integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

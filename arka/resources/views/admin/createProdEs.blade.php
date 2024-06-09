@@ -16,9 +16,10 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
         />
-        <link rel="stylesheet" href="{{asset('assets/adminproductos.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/adminCreate.css')}}">
         <link rel="stylesheet" href="{{asset('assets/nav.css')}}">
         @vite('resources/css/app.css')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
 
     <body>
@@ -51,29 +52,39 @@
         </nav>
 
         <!-- resources/views/admin/create.blade.php -->
-
-    <form method="POST" action="{{ Route('admin.store') }}" enctype="multipart/form-data">
-        @csrf
-        <div class="form-group">
-            <label for="title">Título:</label>
-            <input type="text" name="title" class="form-control" id="title">
+        <div class="form-container">
+            <form class="form" method="POST" action="{{ Route('admin.store') }}" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group py-3 px-3">
+                    <label for="title">Título:</label>
+                    <input type="text" name="title" class="form-control" id="title">
+                </div>
+                <div class="form-group py-3 px-3">
+                    <label for="description">Descripción:</label>
+                    <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+                </div>
+                <div class="form-group py-3 px-3">
+                    <label for="quantity">Cantidad:</label>
+                    <input type="number" name="quantity" class="form-control" id="quantity">
+                </div>
+                <div class="form-group py-3 px-5">
+                    <label for="image">Imagen:</label>
+                    <input type="file" name="image" class="form-control-file" id="image">
+                </div>
+                <button type="submit" class="btn btn-primary" id="agregarProductoBtn">Agregar Producto</button>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="description">Descripción:</label>
-            <textarea name="description" class="form-control" id="description" rows="3"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="quantity">Cantidad:</label>
-            <input type="number" name="quantity" class="form-control" id="quantity">
-        </div>
-        <div class="form-group">
-            <label for="image">Imagen:</label>
-            <input type="file" name="image" class="form-control-file" id="image">
-        </div>
-        <button type="submit" class="btn btn-primary">Agregar Producto</button>
-    </form>
 
         <!-- Bootstrap JavaScript Libraries -->
+        <script>
+            document.getElementById('agregarProductoBtn').addEventListener('click', function() {
+                Swal.fire({
+                    title: "Good job!",
+                    text: "Se Agregor Correctamente!",
+                    icon: "success"
+                    });
+            });
+                </script>
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
             integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

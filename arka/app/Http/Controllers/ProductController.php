@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
+use DB;
 
 class ProductController extends Controller
 {
@@ -13,69 +15,111 @@ class ProductController extends Controller
         return view('productosM',compact('products'));
     }
 
+    public function indexAlternative()
+    {
+        $products = Product::all();
+        return view('admin.productosMe',compact('products'));
+    }
+
     public function create()
     {
-        return view('products.create');
+        return view('admin.createProdMe');
     }
 
-    public function store(Request $request)
+    public function stores(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
             'quantity' => 'required|integer',
-            'image' => 'required|image'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);
-
-        $product = new Product();
-        $product->title = $request->title;
-        $product->description = $request->description;
-        $product->quantity = $request->quantity;
-
-        if ($request->hasFile('image')) {
-            $product->image = $request->file('image')->store('products');
+    
+        try {
+            DB::beginTransaction();
+    
+            $products = new Product();
+            $products->title = $request->input('title');
+            $products->description = $request->input('description');
+            $products->quantity = $request->input('quantity');
+    
+            if ($request->hasFile('image')) {
+                $archivo = $request->file('image');
+                $nombreArchivo = time() . '.' . $archivo->getClientOriginalExtension();
+                $archivo->move(public_path('Archivos'), $nombreArchivo);
+                $products->image = $nombreArchivo;
+            }
+    
+            $products->save();
+    
+            DB::commit();
+    
+            return redirect('/admin/productosMe')->with('success', 'Producto agregado correctamente.');
+        } catch (\Exception $e) {
+            DB::rollback();
         }
-
-        $product->save();
-
-        return redirect()->route('products.index');
     }
 
-    public function show(Product $product)
+    public function edits($id)
     {
-        return view('products.show', compact('product'));
+        $products = Product::findOrFail($id); 
+        return view('admin.updateProdMe', compact('products'));
     }
 
-    public function edit(Product $product)
-    {
-        return view('products.edit', compact('product'));
-    }
-
-    public function update(Request $request, Product $product)
+    public function updates(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
             'quantity' => 'required|integer',
-            'image' => 'image'
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Opcional: No requerimos que la imagen sea siempre obligatoria en la actualización
         ]);
 
-        $product->title = $request->title;
-        $product->description = $request->description;
-        $product->quantity = $request->quantity;
+        try {
+            DB::beginTransaction();
 
-        if ($request->hasFile('image')) {
-            $product->image = $request->file('image')->store('products');
+            $products = Product::findOrFail($id);
+            $products->title = $request->input('title');
+            $products->description = $request->input('description');
+            $products->quantity = $request->input('quantity');
+
+            if ($request->hasFile('image')) {
+                // Si se proporciona una nueva imagen, la actualizamos
+                $archivo = $request->file('image');
+                $nombreArchivo = time() . '.' . $archivo->getClientOriginalExtension();
+                $archivo->move(public_path('Archivos'), $nombreArchivo);
+                $products->image = $nombreArchivo;
+            }
+
+            $products->save();
+
+            DB::commit();
+
+            return redirect('/admin/productosMe')->with('success', 'Producto actualizado correctamente.');
+        } catch (\Exception $e) {
+            DB::rollback();
         }
-
-        $product->save();
-
-        return redirect()->route('products.index');
     }
 
-    public function destroy(Product $product)
+    public function destroys($id)
     {
-        $product->delete();
-        return redirect()->route('products.index');
+        try {
+            DB::beginTransaction();
+
+            $products = Product::findOrFail($id);
+
+            // Eliminar imagen si existe
+            if (!empty($products->image)) {
+                Storage::delete('Archivos/' . $products->image);
+            }
+
+            $products->delete();
+
+            DB::commit();
+
+            return redirect('/admin/productosMe')->with('success', 'Producto eliminado correctamente.');
+        } catch (\Exception $e) {
+            DB::rollback();
+        }
     }
 }

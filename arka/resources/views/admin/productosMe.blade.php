@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Admin ProductosEs</title>
+        <title>Admin ProductosMe</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -50,7 +50,7 @@
                 </li>            
             </ul>
         </nav>
-        <form action="{{ route('admin.createProdEs') }}">
+        <form action="{{ route('admin.createProdMe') }}">
         <div class="container mx-auto px-4">
             <div class="flex justify-start">
         <button class="button1 py-2 px-4">
@@ -75,16 +75,16 @@
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-                @foreach($productos as $producto)
+                @foreach($products as $product)
                 <tr>
                     <td class="px-4 py-2">
-                        <img src="{{ asset('public\Archivos'.$producto->image) }}" class="img-thumbnail w-24 h-auto" alt="Product Image" style="width: 100px;">
+                        <img src="{{ asset('public\Archivos'.$product->image) }}" class="img-thumbnail w-24 h-auto" alt="Product Image" style="width: 100px;">
                     </td>
-                    <td class="px-4 py-2">{{ $producto->title }}</td>
-                    <td class="px-4 py-2">{{ $producto->description }}</td>
-                    <td class="px-4 py-2">{{ $producto->quantity }}</td>
+                    <td class="px-4 py-2">{{ $product->title }}</td>
+                    <td class="px-4 py-2">{{ $product->description }}</td>
+                    <td class="px-4 py-2">{{ $product->quantity }}</td>
                     <td class="px-4 py-2">
-                        <form action="{{ route('admin.editProdEs', $producto->id) }}">
+                        <form action="{{ route('admin.editsProdMe', $product->id) }}">
                         <button class="button2 py-2 px-4">
                             <span class="span2 flex items-center space-x-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg> Editar
@@ -93,7 +93,7 @@
                     </form>
                     </td>
                     <td class="px-4 py-2">
-                        <form method="POST" action="{{ route('admin.destroyProdEs', $producto->id) }}" id="EliminarProductoForm">
+                        <form method="POST" action="{{ route('admin.destroysProdMe', $product->id) }}" id="EliminarProductoForm">
                             @csrf
                             @method('DELETE')
                             <button type="button" class="button3 py-2 px-4" id="EliminarProductoBtn">

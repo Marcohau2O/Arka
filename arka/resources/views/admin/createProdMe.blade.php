@@ -44,7 +44,7 @@
                     <div class="spoke"></div>
                 </div>
                 <li>
-                    <form action="{{route('productosEs.alternative')}}">
+                    <form action="{{route('productosMe.alternative')}}">
                         <button type="submit" class="btn">Regresar a Inicio</button>
                     </form>
                 </li>            
@@ -53,7 +53,7 @@
 
         <!-- resources/views/admin/create.blade.php -->
         <div class="form-container">
-            <form class="form" method="POST" action="{{ Route('admin.storeProdEs') }}" enctype="multipart/form-data">
+            <form class="form" method="POST" action="{{ Route('admin.storesProdMe') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group py-3 px-3">
                     <label for="title">Título:</label>

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>CreateEs</title>
+        <title>Admin UpdateMe</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -44,7 +44,7 @@
                     <div class="spoke"></div>
                 </div>
                 <li>
-                    <form action="{{route('productosEs.alternative')}}">
+                    <form action="{{route('productosMe.alternative')}}">
                         <button type="submit" class="btn">Regresar a Inicio</button>
                     </form>
                 </li>            
@@ -53,34 +53,37 @@
 
         <!-- resources/views/admin/create.blade.php -->
         <div class="form-container">
-            <form class="form" method="POST" action="{{ Route('admin.storeProdEs') }}" enctype="multipart/form-data">
-                @csrf
-                <div class="form-group py-3 px-3">
-                    <label for="title">Título:</label>
-                    <input type="text" name="title" class="form-control" id="title">
-                </div>
-                <div class="form-group py-3 px-3">
-                    <label for="description">Descripción:</label>
-                    <textarea name="description" class="form-control" id="description" rows="3"></textarea>
-                </div>
-                <div class="form-group py-3 px-3">
-                    <label for="quantity">Cantidad:</label>
-                    <input type="number" name="quantity" class="form-control" id="quantity">
-                </div>
-                <div class="form-group py-3 px-5">
-                    <label for="image">Imagen:</label>
-                    <input type="file" name="image" class="form-control-file" id="image">
-                </div>
-                <button type="submit" class="btn btn-primary" id="agregarProductoBtn">Agregar Producto</button>
-            </form>
-        </div>
+        <form class="form" method="POST" action="{{ route('admin.editsProdMe', $products->id) }}" enctype="multipart/form-data">
+            @csrf
+            @method('PUT') <!-- Utilizamos el método PUT para actualizar -->
+            <div class="form-group py-3 px-3">
+                <label for="title">Título:</label>
+                <input type="text" name="title" class="form-control" id="title" value="{{ $products->title }}">
+            </div>
+            <div class="form-group py-3 px-3">
+                <label for="description">Descripción:</label>
+                <textarea name="description" class="form-control" id="description" rows="3">{{ $products->description }}</textarea>
+            </div>
+            <div class="form-group py-3 px-3">
+                <label for="quantity">Cantidad:</label>
+                <input type="number" name="quantity" class="form-control" id="quantity" value="{{ $products->quantity }}">
+            </div>
+            <div class="form-group py-3 px-5">
+                <label for="image">Imagen:</label>
+                <input type="file" name="image" class="form-control-file" id="image">
+            </div>
+            <button type="submit" class="btn btn-primary" id="EditarProductoBtn">Actualizar Producto</button>
+        </form>
+    </div>
+        
+        
 
         <!-- Bootstrap JavaScript Libraries -->
         <script>
-            document.getElementById('agregarProductoBtn').addEventListener('click', function() {
+            document.getElementById('EditarProductoBtn').addEventListener('click', function() {
                 Swal.fire({
                     title: "Good job!",
-                    text: "Se Agregor Correctamente!",
+                    text: "Se Edito Correctamente!",
                     icon: "success"
                     });
             });

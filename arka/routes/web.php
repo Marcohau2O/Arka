@@ -41,16 +41,27 @@ Route::get('/Reservacion', function () {
     return view('reservar');
 });
 
+//Admin dashboard
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->name('admin.dashboard');
 //Vista de admin Para los Crud de Productos Esteticos
 Route::resource('admin.productosEs', ProductoController::class);
 Route::get('admin/productosEs', [ProductoController::class, 'indexAlternative'])->name('productosEs.alternative');
 Route::get('admin/createProdEs', [ProductoController::class, 'create'])->name('admin.createProdEs');
-Route::post('admin/store', [ProductoController::class, 'store'])->name('admin.store');
-Route::get('admin/edit/{id}', [ProductoController::class, 'edit'])->name('admin.edit');
+Route::post('admin/store', [ProductoController::class, 'store'])->name('admin.storeProdEs');
+Route::get('admin/edit/{id}', [ProductoController::class, 'edit'])->name('admin.editProdEs');
 Route::put('admin/edit/{id}', [ProductoController::class, 'update'])->name('admin.updateProdEs');
-Route::delete('admin/destroy/{id}', [ProductoController::class, 'destroy'])->name('admin.destroy');
+Route::delete('admin/destroy/{id}', [ProductoController::class, 'destroy'])->name('admin.destroyProdEs');
 
 // Vista de admin Para los Crud de Productos Medicinales
+//Route::resource('admin.productosMe', ProductController::class);
+Route::get('admin/productosMe', [ProductController::class, 'indexAlternative'])->name('productosMe.alternative');
+Route::get('admin/createProdMe', [ProductController::class, 'create'])->name('admin.createProdMe');
+Route::post('admin/stores', [ProductController::class, 'stores'])->name('admin.storesProdMe');
+Route::get('admin/edits/{id}', [ProductController::class, 'edits'])->name('admin.editsProdMe');
+Route::put('admin/edits/{id}', [ProductController::class, 'updates'])->name('admin.updatesProdMe');
+Route::delete('admin/destroys/{id}', [ProductController::class, 'destroys'])->name('admin.destroysProdMe');
 
 
 require __DIR__.'/auth.php';

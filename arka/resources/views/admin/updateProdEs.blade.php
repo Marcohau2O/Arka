@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Productos Esteticos</title>
+        <title>Admin UpdateEs</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -44,7 +44,7 @@
                     <div class="spoke"></div>
                 </div>
                 <li>
-                    <form >
+                    <form action="{{route('productosEs.alternative')}}">
                         <button type="submit" class="btn">Regresar a Inicio</button>
                     </form>
                 </li>            
@@ -53,7 +53,7 @@
 
         <!-- resources/views/admin/create.blade.php -->
         <div class="form-container">
-        <form class="form" method="POST" action="{{ route('admin.edit', $producto->id) }}" enctype="multipart/form-data">
+        <form class="form" method="POST" action="{{ route('admin.editProdEs', $producto->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT') <!-- Utilizamos el método PUT para actualizar -->
             <div class="form-group py-3 px-3">

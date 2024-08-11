@@ -41,6 +41,18 @@
                 </div>
                 <div class="spoke"></div>
             </div>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('checkout')}}">
+                    Carrito
+                    <span class="badge bg-danger">
+                        @php
+                        $cart = session()->get('cart',[]);
+                        $totalItems = array_sum(array_column($cart, 'tasks'));
+                        @endphp
+                        {{ $totalItems }}
+                    </span>
+                </a>
+            </li>
             <li>
                 <form action="{{ route('inicio') }}">
                     <button type="submit" class="btn">Regresar a Inicio</button>
@@ -48,6 +60,7 @@
             </li>            
         </ul>
     </nav>
+    @include('partials.msg')
     <div class="card-container">
         @foreach($products as $product)
         <div class="card">
@@ -55,8 +68,13 @@
             <div class="card__content">
                 <p class="card__title">{{ $product->title }}</p>
                 <p class="card__description">{{ $product->description }}</p>
-                <p class="card__quantity">Costo: {{ $product->quantity }}</p>
+                <p class="card__quantity">Costo: {{ number_format($product['quantity'], 0, '.', ',') }}</p>
             </div>
+            <form action="{{route('adds')}}" method="POST">
+                @csrf
+                <input type="hidden" name="id" value="{{$product->id}}"/>
+                <input type="submit" name="btn" class="btn btn-success w-100" value="addCart2">
+              </form>
         </div>
         @endforeach
     </div>

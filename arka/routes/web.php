@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\CartController;
 
 /*Route::get('/inicio', function () {
     return view('inicio');
@@ -63,5 +64,11 @@ Route::get('admin/edits/{id}', [ProductController::class, 'edits'])->name('admin
 Route::put('admin/edits/{id}', [ProductController::class, 'updates'])->name('admin.updatesProdMe');
 Route::delete('admin/destroys/{id}', [ProductController::class, 'destroys'])->name('admin.destroysProdMe');
 
+//carrito de Compra 
+Route::post('cart/add', [CartController::class, 'add'])->name('add');
+Route::post('cart/adds', [CartController::class, 'adds'])->name('adds');
+Route::get('cart/checkout', [CartController::class, 'checkout'])->name('checkout');
+Route::get('cart/clear', [CartController::class, 'clear'])->name('clear');
+Route::post('cart/removeitem', [CartController::class, 'removeItem'])->name('removeitem');
 
 require __DIR__.'/auth.php';

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Title</title>
+        <title>Inicio de Session</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -22,6 +22,17 @@
     <body>
         <div class="container">
             <div class="heading">Sign In</div>
+            @if ($errors->any())
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: '{{ $errors->first() }}',
+                    });
+                });
+            </script>
+        @endif
             <form class="form" action="{{route('login')}}" method="POST">
                 @csrf
               <input
@@ -56,5 +67,6 @@
             integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
             crossorigin="anonymous"
         ></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
 </html>

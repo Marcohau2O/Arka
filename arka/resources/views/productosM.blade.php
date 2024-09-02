@@ -18,6 +18,7 @@
     />
     <link rel="stylesheet" href="{{asset('assets/productos.css')}}">
     <link rel="stylesheet" href="{{asset('assets/nav.css')}}">
+    @vite('resources/css/app.css')
 </head>
 
 <body>
@@ -64,17 +65,19 @@
     <div class="card-container">
         @foreach($products as $product)
         <div class="card">
-            <img src="{{ asset('storage').'/'.$product->image }}" alt="Product Image" width="500">
+            <img src="{{ asset('storage').'/'.$product->image }}" class="card-img-top img" alt="Product Image">
             <div class="card__content">
                 <p class="card__title">{{ $product->title }}</p>
                 <p class="card__description">{{ $product->description }}</p>
                 <p class="card__quantity">Costo: {{ number_format($product['quantity'], 0, '.', ',') }}</p>
             </div>
+            <div class="m-4">
             <form action="{{route('adds')}}" method="POST">
                 @csrf
                 <input type="hidden" name="id" value="{{$product->id}}"/>
                 <input type="submit" name="btn" class="btn btn-success w-100" value="addCart2">
               </form>
+            </div>
         </div>
         @endforeach
     </div>

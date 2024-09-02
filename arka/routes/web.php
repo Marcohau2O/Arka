@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 
 /*Route::get('/inicio', function () {
     return view('inicio');
@@ -70,5 +72,11 @@ Route::post('cart/adds', [CartController::class, 'adds'])->name('adds');
 Route::get('cart/checkout', [CartController::class, 'checkout'])->name('checkout');
 Route::get('cart/clear', [CartController::class, 'clear'])->name('clear');
 Route::post('cart/removeitem', [CartController::class, 'removeItem'])->name('removeitem');
+
+//Pasarela de Pago
+Route::post('/payment/store', [PaymentController::class, 'store'])->name('payment.store');
+Route::get('/payment/confirmation', [PaymentController::class, 'confirmation'])->name('payment.confirmation');
+Route::view('/Pasarela-Pago', 'Pasarela')->name('Pasarela');
+
 
 require __DIR__.'/auth.php';

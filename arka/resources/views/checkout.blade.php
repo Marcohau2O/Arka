@@ -141,11 +141,13 @@
                         @endif
                     </div>
                     <div style="display: flex; justify-content: flex-end">
-                        <button 
+                        <form action="{{route('Pasarela')}}">
+                        <button type="submit"
                             class="m-10 px-6 py-3 text-lg rounded-lg shadow-lg {{ $isDisabled ? 'bg-gray-400 text-gray-600 cursor-not-allowed' : 'bg-green-500 text-white hover:bg-green-600' }}" 
                             {{ $isDisabled ? 'disabled' : '' }}>
                             <span class="btn-txt">Pagar</span>
                         </button>
+                        </form>
                     </div>
         </div> 
         <!-- Bootstrap JavaScript Libraries -->

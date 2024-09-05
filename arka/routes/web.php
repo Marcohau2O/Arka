@@ -7,6 +7,8 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\VentasController;
+use App\Http\Controllers\UserController;
 
 /*Route::get('/inicio', function () {
     return view('inicio');
@@ -24,6 +26,7 @@ Route::middleware('auth')->group(function () {
 
 Route::view('/contactanos', 'contactanos')->name('contactanos');
 Route::view('/nosotros', 'nosotros')->name('nosotros');
+Route::get('/Compras', [VentasController::class, 'Ventas'])->name('Compras');
 
 Route::get('/serviciosE', function () {
     return view('serviciosE');
@@ -48,6 +51,11 @@ Route::get('/Reservacion', function () {
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');
+
+Route::get('/admin/administracionUser', [UserController::class, 'administracionUser'])->name('admin.administracionUser');
+
+Route::get('/admin/administracionVent', [VentasController::class, 'administracionVent'])->name('admin.administracionVent');
+
 //Vista de admin Para los Crud de Productos Esteticos
 Route::resource('admin.productosEs', ProductoController::class);
 Route::get('admin/productosEs', [ProductoController::class, 'indexAlternative'])->name('productosEs.alternative');

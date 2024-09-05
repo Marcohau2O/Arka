@@ -85,7 +85,7 @@
                             <i class="fa fa-user icon p-2"></i>
                         </div>
                         <div class="flex items-center border border-gray-300 rounded-md overflow-hidden">
-                            <input type="email" id="email" name="email" placeholder="Email Address" required class="flex-1 p-2 placeholder-gray-400 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <input type="email" id="email" name="email" placeholder="Email Address" value="{{ old('email', auth()->user()->email) }}" required class="flex-1 p-2 placeholder-gray-400 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                             <i class="fa fa-envelope icon p-2"></i>
                         </div>
                         <div class="flex items-center border border-gray-300 rounded-md overflow-hidden">
@@ -130,7 +130,7 @@
                             <input type="number" id="exp_year" name="exp_year" placeholder="Exp Year" required maxlength="2" class="w-1/2 p-2 border border-gray-300 rounded-md placeholder-gray-400 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         </div>
                         <input type="hidden" name="total_products" value="{{ $cartCollection->sum('tasks')}}">
-                        <input type="hidden" name="total_amount" value="{{ number_format($total, 2)}}">
+                        <input type="hidden" name="total_amount" value="{{ number_format($total, 2, '.', '')}}">
                         <div class="flex justify-center">
                             <button type="submit" class="px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">PAY NOW</button>
                         </div>

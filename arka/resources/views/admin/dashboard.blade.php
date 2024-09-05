@@ -58,6 +58,36 @@
     <div class="card-container">
         <div class="card">
             <div class="card-image"></div>
+            <p class="card-title">Administracion de Usuario</p>
+            <p class="card-body">
+                Administracion de Usuarios.
+            </p>
+            <p>
+                Cantidad de Usuarios Total: {{ $totalUser }}.
+            </p>
+            <p>
+                <button onclick="window.location.href='{{ route('admin.administracionUser') }}'" class="button type1">
+                    <span class="btn-txt">Más Información</span>
+                </button>
+            </p>
+        </div>
+        <div class="card">
+            <div class="card-image"></div>
+            <p class="card-title">Administracion de Ventas</p>
+            <p class="card-body">
+                Esto es ver las ventas de los productos.
+            </p>
+            <p>
+                Cantidad de Ventas Total: {{ $totalVentas}}.
+            </p>
+            <p>
+                <button onclick="window.location.href='{{ route('admin.administracionVent') }}'" class="button type1">
+                    <span class="btn-txt">Más Información</span>
+                </button>
+            </p>
+        </div>
+        <div class="card">
+            <div class="card-image"></div>
             <p class="card-title">Productos Esteticos</p>
             <p class="card-body">
                 Esto es para editar todo los productos Esteticos.

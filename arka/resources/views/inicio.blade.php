@@ -51,7 +51,12 @@
                 </form>
             </li>
             <button class="btn" onclick="window.location.href='{{ route('profile.edit') }}'"> Configuración
-            </button>          
+            </button>
+            <li>
+                <form action="{{ route('Compras')}}">
+                    <button class="btn" type="submit">Compras</button>
+                </form>
+            </li>          
             <button class="Btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <div class="sign">
                     <svg viewBox="0 0 512 512">

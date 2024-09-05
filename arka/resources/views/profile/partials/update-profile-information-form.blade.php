@@ -58,7 +58,7 @@
     display: flex;
     flex-direction: column;
     border-radius: 10px;
-    margin-left: auto; /* Alinea hacia la derecha */
+    margin: auto; /* Alinea hacia la derecha */
 }
 
 .title {

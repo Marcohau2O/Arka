@@ -55,6 +55,7 @@ Route::get('/admin/dashboard', function () {
 Route::get('/admin/administracionUser', [UserController::class, 'administracionUser'])->name('admin.administracionUser');
 
 Route::get('/admin/administracionVent', [VentasController::class, 'administracionVent'])->name('admin.administracionVent');
+Route::put('/ventas/{id}/update-status', [VentasController::class, 'updateStatus'])->name('ventas.updateStatus');
 
 //Vista de admin Para los Crud de Productos Esteticos
 Route::resource('admin.productosEs', ProductoController::class);

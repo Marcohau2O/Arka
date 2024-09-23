@@ -23,6 +23,8 @@ class PaymentController extends Controller
             'total_amount' => 'required|numeric',
         ]);
 
+        $validatedData['status'] = 'En Espera';
+
         $payment = Payment::create($validatedData);
 
         session()->forget('cart');

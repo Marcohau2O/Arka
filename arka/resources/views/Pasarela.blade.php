@@ -19,7 +19,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
         <link rel="stylesheet" href="{{asset('assets/nav.css')}}">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-        
+        <script src="https://unpkg.com/@paypal/paypal-js@8.0.0/dist/iife/paypal-js.min.js"></script>
+        <script src="https://sdk.mercadopago.com/js/v2"></script>
         @vite('resources/css/app.css')
     </head>
 
@@ -139,14 +140,66 @@
                 
                 </form>
                 <div id="paypal-button" class="hidden">
-                    <button>
-                        <i class="fa fa-cc-paypal mr-1"></i> Pay with PayPal
-                    </button>
+                    <div id="paypal-buttons" class="flex justify-center items-center m-5"></div>
+                    <script>
+                        
+                        var totalAmount = "{{ number_format($total, 2, '.', '') }}";
+                    
+                        window.paypalLoadScript({ clientId: "{{ config('app.paypal_id') }}" }).then((paypal) => {
+                            paypal.Buttons({
+                                createOrder: function(data, actions) {
+                                    return actions.order.create({
+                                        purchase_units: [{
+                                            amount: {
+                                                value: totalAmount
+                                            }
+                                        }]
+                                    });
+                                },
+                                onApprove: function(data, actions) {
+                                    console.log(data)
+                                }
+                            }).render("#paypal-buttons");
+                        });
+                    </script>
                 </div>
                 <div id="mercado-button" class="hidden">
-                    <button>
-                        <i class="fa fa-credit-card icon mr-1"></i> Pay with Mercado Libre
-                    </button>
+                    <?php
+
+                    use MercadoPago\Client\Preference\PreferenceClient;
+                    use MercadoPago\MercadoPagoConfig;
+
+                    require '../vendor/autoload.php';
+
+                    MercadoPagoConfig::setAccessToken("TEST-2252785217095190-092121-973838df4e58f72a3ce460baf681d1a9-1070938283");
+
+                    $client = new PreferenceClient();
+
+                    $preference = $client->create([
+                        "items" => [
+                            [
+                                "id" => "DEP-001",
+                                "title" => "Balon de Futbol",
+                                "quantity" => 1,
+                                "unit_price" => 550.00
+                            ]
+                        ],
+                        "statement_descriptor" => "Arka",
+                        "external_reference" => "CDP001",
+                    ]);
+                    ?>
+                    <div id="wallet_container"></div>
+                    <script>
+                        const mp = new MercadoPago('TEST-636f3e76-4cd5-4cfd-898a-f908f4cb7b7c', {
+                            locale: 'es-MX'
+                        });
+
+                        mp.bricks().create("wallet", "wallet_container", {
+                            initialization: {
+                                preferenceId: '<?php echo $preference->id; ?>' // Sin punto y coma al final
+                            }
+                        });
+                    </script>
                 </div>
             </div>
         </div>

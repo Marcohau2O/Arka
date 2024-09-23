@@ -57,7 +57,12 @@
                 <p><span class="font-bold">Productos Totales:</span> {{ $venta->total_products }}</p>
                 <p><span class="font-bold">Monto Total:</span> ${{ number_format($venta->total_amount, 2) }}</p>
                 <p><span class="font-bold">Fecha:</span> {{ $venta->created_at->format('d-m-Y') }}</p>
-                <p class="mt-2 text-green-600 font-semibold">Estatus: Pagados</p>
+                <p class="mt-2 text-lg font-semibold">
+                    <span class="font-bold text-black">Estatus:</span>
+                    <span class="{{ $venta->status === 'Completado' ? 'text-green-600' : ($venta->status === 'En Espera' ? 'text-yellow-600' : 'text-red-600')}}">
+                        {{ $venta->status}}
+                    </span>
+                </p>
             </div>
             @endforeach
         </div>

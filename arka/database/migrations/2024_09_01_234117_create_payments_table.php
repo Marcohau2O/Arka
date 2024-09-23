@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('city');
             $table->integer('total_products');
             $table->decimal('total_amount', 10, 2);
+            $table->string('status');
             $table->timestamps();
         });
     }

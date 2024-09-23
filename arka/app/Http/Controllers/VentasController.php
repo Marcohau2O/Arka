@@ -23,4 +23,14 @@ class VentasController extends Controller
         
         return view('Compras', compact('venta2'));
     }
+
+    public function updateStatus (Request $request, $id) {
+
+        $venta = Payment::find($id);
+    
+        $venta->status = $request->status;
+        $venta->save();
+    
+        return redirect()->back()->with('success', 'Estatus de la venta actualizado correctamente.');
+    }
 }

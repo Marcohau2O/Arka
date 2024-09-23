@@ -27,7 +27,7 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
-
+    'paypal_id' => 'AUlEwsh-pHrV1symwdUSrj4pH2ijkSombI0y_tiu5e1HDb7N3hT-jC6uGLi92hrrIzpV3sAGeeBEqPJw',
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

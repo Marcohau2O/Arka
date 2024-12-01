@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
         <link rel="stylesheet" href="{{asset('assets/nav.css')}}">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-        <script src="https://unpkg.com/@paypal/paypal-js@8.0.0/dist/iife/paypal-js.min.js"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id={{ config('app.paypal_id') }}&currency=MXN"></script>
         <script src="https://sdk.mercadopago.com/js/v2"></script>
         @vite('resources/css/app.css')
     </head>
@@ -143,24 +143,67 @@
                     <div id="paypal-buttons" class="flex justify-center items-center m-5"></div>
                     <script>
                         
+                        var Currentuser = @json(auth()->user());
                         var totalAmount = "{{ number_format($total, 2, '.', '') }}";
+                        var cart = @json($cart);
                     
-                        window.paypalLoadScript({ clientId: "{{ config('app.paypal_id') }}" }).then((paypal) => {
                             paypal.Buttons({
                                 createOrder: function(data, actions) {
                                     return actions.order.create({
                                         purchase_units: [{
                                             amount: {
-                                                value: totalAmount
+                                                value: totalAmount,
+                                                currency_code: 'MXN'
                                             }
                                         }]
                                     });
                                 },
                                 onApprove: function(data, actions) {
                                     console.log(data)
+                                    console.log(Currentuser);
+
+                                    var form = document.createElement('form');
+                                form.method = 'POST';
+                                form.action = '{{ route("storePaypalTransaction") }}'; // La ruta a tu controlador
+
+                                // Crear un campo oculto para el token CSRF
+                                var csrfToken = document.createElement('input');
+                                csrfToken.type = 'hidden';
+                                csrfToken.name = '_token';
+                                csrfToken.value = '{{ csrf_token() }}';
+                                form.appendChild(csrfToken);
+
+                                // Crear campos ocultos para los datos
+                                var userField = document.createElement('input');
+                                userField.type = 'hidden';
+                                userField.name = 'user';
+                                userField.value = JSON.stringify(Currentuser);
+                                form.appendChild(userField);
+
+                                var transactionDataField = document.createElement('input');
+                                transactionDataField.type = 'hidden';
+                                transactionDataField.name = 'transaction_data';
+                                transactionDataField.value = JSON.stringify(data);
+                                form.appendChild(transactionDataField);
+
+                                var cartField = document.createElement('input');
+                                cartField.type = 'hidden';
+                                cartField.name = 'cart';
+                                cartField.value = JSON.stringify(cart);
+                                form.appendChild(cartField);
+
+                                // Crear campo oculto para el total
+                                var totalField = document.createElement('input');
+                                totalField.type = 'hidden';
+                                totalField.name = 'total_amount';
+                                totalField.value = totalAmount;
+                                form.appendChild(totalField);
+                                
+                                // Enviar el formulario
+                                document.body.appendChild(form);
+                                form.submit();
                                 }
                             }).render("#paypal-buttons");
-                        });
                     </script>
                 </div>
                 <div id="mercado-button" class="hidden">
@@ -175,6 +218,7 @@
 
                     $client = new PreferenceClient();
 
+                    try {
                     $preference = $client->create([
                         "items" => [
                             [
@@ -187,6 +231,10 @@
                         "statement_descriptor" => "Arka",
                         "external_reference" => "CDP001",
                     ]);
+                    } catch (Exception $e) {
+                        echo "Error creando la Preferencia:" . $e->getMessage();
+                        exit;
+                    }
                     ?>
                     <div id="wallet_container"></div>
                     <script>

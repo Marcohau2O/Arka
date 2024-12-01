@@ -52,6 +52,7 @@
             <span class="block sm:inline">{{ session('success') }}</span>
         </div>
     @endif
+    <h1 class="text-center font-semibold text-3xl">Card payment</h1>
         <div class="grid grid-cols-4 gap-4">
             @foreach($ventas as $venta)
             <div class="bg-white shadow-md rounded-lg p-5 border border-gray-200">
@@ -138,6 +139,95 @@
                 </div>
             </div>
 
+            @endforeach
+        </div>
+    </div>
+    
+    <div class="container mx-auto p-10">
+        <h1 class="text-center font-semibold text-3xl p-10">Transacciones PayPal</h1>
+        <div class="grid grid-cols-4 gap-4">
+            @foreach($paypalTransactions as $transaction)
+                <div class="bg-white shadow-md rounded-lg p-5 border border-gray-200">
+                    <h3 class="text-lg font-semibold mb-2">{{ $transaction->full_name }}</h3>
+                    <p><span class="font-bold">Correo:</span> {{ $transaction->email }}</p>
+                    <p><span class="font-bold">Productos Totales:</span> {{ $transaction->cart }}</p>
+                    <p><span class="font-bold">Monto Total:</span> ${{ number_format($transaction->total_amount, 2) }}</p>
+                    <p><span class="font-bold">Fecha:</span> {{ $transaction->created_at->format('d-m-Y') }}</p>
+                    <p class="mt-2 text-lg font-semibold">
+                        <span class="font-bold text-black">Estatus:</span>
+                        <span class="{{ $transaction->status === 'Completado' ? 'text-purple-500' :
+                            ($transaction->status === 'En Espera' ? 'text-yellow-600' :
+                            ($transaction->status === 'Procesando' ? 'text-blue-600' :
+                            ($transaction->status === 'Enviado' ? 'text-green-600' : 'text-red-600')))}}">
+                            {{ $transaction->status }}
+                        </span>
+                    </p>
+    
+                    @if($transaction->status != 'Completado')
+                        <button class="m-2 p-2 rounded-xl bg-blue-800 text-white" onclick="openModal({{ $transaction->id }})">Cambiar estatus</button>
+                    @endif
+                </div>
+    
+                <div id="modal-{{ $transaction->id }}" class="fixed inset-0 hidden bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
+                    <div class="relative bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
+                        <button onclick="closeModal({{ $transaction->id }})" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                
+                        <h2 class="text-xl font-bold text-gray-800 mb-4 text-center">Cambiar Estatus</h2>
+                        
+                        <div class="flex items-center justify-center mb-4">
+                            @if ($transaction->status === 'En Espera')
+                                <svg class="h-10 w-10 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" />
+                                </svg>
+                                <span class="mx-4 text-gray-700 text-lg font-medium">→</span>
+                                <span class="text-blue-500 text-lg font-bold">Procesando</span>
+                            @elseif ($transaction->status === 'Procesando')
+                                <svg class="h-10 w-10 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12l-4-4-4 4m8 8l-4-4-4 4" />
+                                </svg>
+                                <span class="mx-4 text-gray-700 text-lg font-medium">→</span>
+                                <span class="text-green-500 text-lg font-bold">Enviado</span>
+                            @elseif ($transaction->status === 'Enviado')
+                                <svg class="h-10 w-10 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="mx-4 text-gray-700 text-lg font-medium">→</span>
+                                <span class="text-purple-500 text-lg font-bold">Completado</span>
+                            @endif
+                        </div>
+                        
+                        <form action="{{ route('ventas.updateStatusPaypal', $transaction->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            
+                            <input type="hidden" name="status" value="
+                            @if ($transaction->status === 'En Espera')
+                                Procesando
+                            @elseif ($transaction->status === 'Procesando')
+                                Enviado
+                            @elseif ($transaction->status === 'Enviado')
+                                Completado
+                            @endif
+                        ">
+    
+                            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                                Cambiar a 
+                                @if ($transaction->status === 'En Espera')
+                                    "Procesando"
+                                @elseif ($transaction->status === 'Procesando')
+                                    "Enviado"
+                                @elseif ($transaction->status === 'Enviado')
+                                    "Completado"
+                                @endif
+                            </button>
+                        </form>
+                    </div>
+                </div>
+    
             @endforeach
         </div>
     </div>

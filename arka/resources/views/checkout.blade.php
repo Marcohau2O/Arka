@@ -165,7 +165,7 @@
         ></script>
         <script>
             document.getElementById('add-product').addEventListener('click', function(event) {
-                event.preventDefault(); // Evita que el enlace realice la acción por defecto
+                event.preventDefault();
             
                 Swal.fire({
                     title: '¿Donde Ir?',

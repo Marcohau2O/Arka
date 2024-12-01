@@ -56,6 +56,7 @@ Route::get('/admin/administracionUser', [UserController::class, 'administracionU
 
 Route::get('/admin/administracionVent', [VentasController::class, 'administracionVent'])->name('admin.administracionVent');
 Route::put('/ventas/{id}/update-status', [VentasController::class, 'updateStatus'])->name('ventas.updateStatus');
+Route::put('/ventas/{id}/update-status-paypal', [VentasController::class, 'updateStatusPaypal'])->name('ventas.updateStatusPaypal');
 
 //Vista de admin Para los Crud de Productos Esteticos
 Route::resource('admin.productosEs', ProductoController::class);
@@ -84,7 +85,9 @@ Route::post('cart/removeitem', [CartController::class, 'removeItem'])->name('rem
 
 //Pasarela de Pago
 Route::post('/payment/store', [PaymentController::class, 'store'])->name('payment.store');
+Route::post('/payment/storePaypalTransaction', [PaymentController::class, 'storePaypalTransaction'])->name('storePaypalTransaction');
 Route::get('/payment/confirmation', [PaymentController::class, 'confirmation'])->name('payment.confirmation');
+Route::get('/payment/paypalconfirmation', [PaymentController::class, 'confirmation2'])->name('payment.paypalconfirmation');
 Route::view('/Pasarela-Pago', 'Pasarela')->name('Pasarela');
 
 

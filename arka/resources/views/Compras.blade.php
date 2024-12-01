@@ -45,6 +45,8 @@
         </ul>
     </nav>
 
+    <h1 class="text-center font-semibold text-3xl">Card payment</h1>
+
     <div class="container mx-auto p-10">
         <div class="grid grid-cols-4 gap-4">
             @foreach($venta2 as $venta)
@@ -59,7 +61,10 @@
                 <p><span class="font-bold">Fecha:</span> {{ $venta->created_at->format('d-m-Y') }}</p>
                 <p class="mt-2 text-lg font-semibold">
                     <span class="font-bold text-black">Estatus:</span>
-                    <span class="{{ $venta->status === 'Completado' ? 'text-green-600' : ($venta->status === 'En Espera' ? 'text-yellow-600' : 'text-red-600')}}">
+                    <span class="{{ $venta->status === 'Completado' ? 'text-purple-500' :
+                        ($venta->status === 'En Espera' ? 'text-yellow-600' :
+                        ($venta->status === 'Procesando' ? 'text-blue-600' :
+                        ($venta->status === 'Enviado' ? 'text-green-600' : 'text-red-600')))}}">
                         {{ $venta->status}}
                     </span>
                 </p>
@@ -68,6 +73,35 @@
         </div>
     </div>
     
+    <h1 class="text-center font-semibold text-3xl">Paypal Transactions</h1>
+
+    <div class="container mx-auto p-10">
+        <div class="grid grid-cols-4 gap-4">
+            @foreach($paypalTransactions as $transaction)
+            <div class="bg-white shadow-md rounded-lg p-5 border border-gray-200">
+                <h3 class="text-lg font-semibold mb-2">{{ $transaction->user_name }}</h3>
+                <p><span class="font-bold">Correo:</span> {{ $transaction->user_email }}</p>
+                <p><span class="font-bold">Order ID:</span> {{ $transaction->order_id }}</p>
+                <p><span class="font-bold">Payment Source:</span> {{ $transaction->payment_source }}</p>
+                <p><span class="font-bold">Productos Totales:</span> {{ $transaction->cart }}</p>
+                <p><span class="font-bold">Monto Total:</span> ${{ number_format($transaction->total_amount, 2) }}</p>
+                <p><span class="font-bold">Fecha:</span> {{ $transaction->created_at->format('d-m-Y') }}</p>
+                <p class="mt-2 text-lg font-semibold">
+                    <span class="font-bold text-black">Estatus:</span>
+                    <span class="{{ $transaction->status === 'Completado' ? 'text-purple-500' :
+                        ($transaction->status === 'En Espera' ? 'text-yellow-600' :
+                        ($transaction->status === 'Procesando' ? 'text-blue-600' :
+                        ($transaction->status === 'Enviado' ? 'text-green-600' : 'text-red-600')))}}">
+                        {{ $transaction->status }}
+                    </span>
+                </p>
+            </div>
+            @endforeach
+        </div>
+    </div>
+    
+
+    <h1 class="text-center font-semibold text-3xl">Mercado Pago Transactions</h1>
 
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

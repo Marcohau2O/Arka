@@ -207,45 +207,20 @@
                     </script>
                 </div>
                 <div id="mercado-button" class="hidden">
-                    <?php
-
-                    use MercadoPago\Client\Preference\PreferenceClient;
-                    use MercadoPago\MercadoPagoConfig;
-
-                    require '../vendor/autoload.php';
-
-                    MercadoPagoConfig::setAccessToken("TEST-2252785217095190-092121-973838df4e58f72a3ce460baf681d1a9-1070938283");
-
-                    $client = new PreferenceClient();
-
-                    try {
-                    $preference = $client->create([
-                        "items" => [
-                            [
-                                "id" => "DEP-001",
-                                "title" => "Balon de Futbol",
-                                "quantity" => 1,
-                                "unit_price" => 550.00
-                            ]
-                        ],
-                        "statement_descriptor" => "Arka",
-                        "external_reference" => "CDP001",
-                    ]);
-                    } catch (Exception $e) {
-                        echo "Error creando la Preferencia:" . $e->getMessage();
-                        exit;
-                    }
-                    ?>
                     <div id="wallet_container"></div>
+                
+                    
+                    <script src="https://sdk.mercadopago.com/js/v2"></script>
                     <script>
-                        const mp = new MercadoPago('TEST-636f3e76-4cd5-4cfd-898a-f908f4cb7b7c', {
+                        const mp = new MercadoPago('{{ $publicKey }}', {
                             locale: 'es-MX'
                         });
-
+                
+                        // Renderizar el botón de pago
                         mp.bricks().create("wallet", "wallet_container", {
                             initialization: {
-                                preferenceId: '<?php echo $preference->id; ?>' // Sin punto y coma al final
-                            }
+                                preferenceId: '{{ $preferenceId }}'
+                            },
                         });
                     </script>
                 </div>

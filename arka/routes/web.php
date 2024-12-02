@@ -9,6 +9,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VentasController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MercadoPagoController;
 
 /*Route::get('/inicio', function () {
     return view('inicio');
@@ -90,5 +91,9 @@ Route::get('/payment/confirmation', [PaymentController::class, 'confirmation'])-
 Route::get('/payment/paypalconfirmation', [PaymentController::class, 'confirmation2'])->name('payment.paypalconfirmation');
 Route::view('/Pasarela-Pago', 'Pasarela')->name('Pasarela');
 
+Route::get('/Pasarela-Pago', [MercadoPagoController::class, 'createPreference'])->name('Pasarela');
+Route::get('/payment-success', [MercadoPagoController::class, 'success'])->name('payment.success');
+Route::get('/payment-failure', [MercadoPagoController::class, 'failure'])->name('payment.failure');
+Route::get('/payment-pending', [MercadoPagoController::class, 'pending'])->name('payment.pending');
 
 require __DIR__.'/auth.php';

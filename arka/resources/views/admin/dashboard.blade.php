@@ -78,7 +78,7 @@
                 Esto es ver las ventas de los productos.
             </p>
             <p>
-                Cantidad de Ventas Total: {{ $totalVentas + $totalVentas2}}.
+                Cantidad de Ventas Total: {{ $totalVentas + $totalVentas2 + $totalVentas3 }}.
             </p>
             <p>
                 <button onclick="window.location.href='{{ route('admin.administracionVent') }}'" class="button type1">

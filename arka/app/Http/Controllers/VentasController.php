@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Payment;
 use App\Models\PaypalTransaction;
+use App\Models\MercadoPagoTransaction;
 
 class VentasController extends Controller
 {
@@ -14,7 +15,8 @@ class VentasController extends Controller
     {
         $ventas = Payment::all();
         $paypalTransactions = PaypalTransaction::all();
-        return view('admin.administracionVent', compact('ventas', 'paypalTransactions'));
+        $mercadopagoTrasactions = MercadoPagoTransaction::all();
+        return view('admin.administracionVent', compact('ventas', 'paypalTransactions', 'mercadopagoTrasactions'));
     }
 
     public function Ventas() {
@@ -24,8 +26,10 @@ class VentasController extends Controller
         $venta2 = Payment::where('email', $userEmail)->get();
 
         $paypalTransactions = PaypalTransaction::where('user_email', $userEmail)->get();
+
+        $mercadopagoTrasactions = MercadoPagoTransaction::where('user_email', $userEmail)->get();
         
-        return view('Compras', compact('venta2', 'paypalTransactions'));
+        return view('Compras', compact('venta2', 'paypalTransactions', 'mercadopagoTrasactions'));
     }
 
     public function updateStatus (Request $request, $id) {
@@ -45,6 +49,16 @@ class VentasController extends Controller
         $paypalTransactions->status = $request->status;
         $paypalTransactions->save();
     
-        return redirect()->back()->with('success', 'Estatus de la Transicion de Paypal se actualizado correctamente.');
+        return redirect()->back()->with('success', 'Estatus de la Transaccion de Paypal se actualizado correctamente.');
+    }
+
+    public function updateStatusMercadoPago(Request $request, $id) {
+
+        $mercadopagoTrasactions = MercadoPagoTransaction::find($id);
+
+        $mercadopagoTrasactions->status = $request->status;
+        $mercadopagoTrasactions->save();
+
+        return redirect()->back()->with('success', 'Estatus de la Transaccion de Mercado Pago se actualizo correctamente');
     }
 }

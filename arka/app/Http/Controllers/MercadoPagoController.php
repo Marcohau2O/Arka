@@ -9,6 +9,7 @@ use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Preference;
 use MercadoPago\Item;
 use MercadoPago\Payer;
+use App\Models\MercadoPagoTransaction;
 
 class MercadoPagoController extends Controller
 {
@@ -61,7 +62,7 @@ class MercadoPagoController extends Controller
         }
 
 
-        session()->forget('cart');
+        
 
         
         // Pasar datos a la vista
@@ -73,11 +74,48 @@ class MercadoPagoController extends Controller
 
     public function success(Request $request)
     {
-        // Datos del pago
+        // session()->forget('cart');
+
         $paymentData = $request->all();
 
-        // Puedes guardar los datos en tu base de datos o procesarlos
-        return view('payment-success', ['data' => $paymentData]);
+        $User = auth()->user();
+
+        $carta = session()->get('cart', []);
+        $cartaCollection = collect($carta);
+
+        $subto = $cartaCollection->sum(function ($item) {
+            return (float) $item['tasks'] * (float) $item['price'];
+        });
+
+        $taxs = $subto * 0.10;
+        $totales = $subto + $taxs;
+
+        MercadoPagoTransaction::create([
+            'collection_id' => $paymentData['collection_id'] ?? null,
+            'collection_status' => $paymentData['collection_status'] ?? null,
+            'external_reference' => $paymentData['external_reference'] ?? null,
+            'merchant_account_id' => $paymentData['merchant_account_id'] ?? null,
+            'merchant_order_id' => $paymentData['merchant_order_id'] ?? null,
+            'payment_id' => $paymentData['payment_id'] ?? null,
+            'payment_type' => $paymentData['payment_type'] ?? null,
+            'preference_id' => $paymentData['preference_id'] ?? null,
+            'processing_mode' => $paymentData['processing_mode'] ?? null,
+            'site_id' => $paymentData['site_id'] ?? null,
+            'status' => 'En Espera',
+            'user_name' => $User->name,
+            'user_email' => $User->email,
+            'tasks' => $cartaCollection->sum('tasks'),
+            'total_amount' => $totales,
+        ]);
+
+        session()->forget('cart');
+
+        return view('payment-success', [
+            'data' => $paymentData,
+            'user' => $User,
+            'cart' => $carta,
+            'total' => $totales,
+    ]);
     }
 
     public function failure(Request $request)

@@ -4,6 +4,7 @@ namespace App\Providers;
 use App\Models\User;
 use App\Models\Payment;
 use App\Models\PaypalTransaction;
+use App\Models\MercadoPagoTransaction;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -28,5 +29,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share('totalVentas', Payment::count());
 
         view()->share('totalVentas2', PaypalTransaction::count());
+
+        view()->share('totalVentas3', MercadoPagoTransaction::count());
     }
 }

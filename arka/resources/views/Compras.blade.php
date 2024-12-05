@@ -103,6 +103,31 @@
 
     <h1 class="text-center font-semibold text-3xl">Mercado Pago Transactions</h1>
 
+    <div class="container mx-auto p-10">
+        <div class="grid grid-cols-4 gap-4">
+            @foreach($mercadopagoTrasactions as $transactionmercado)
+            <div class="bg-white shadow-md rounded-lg p-5 border border-gray-200">
+                <h3 class="text-lg font-semibold mb-2">{{ $transactionmercado->user_name }}</h3>
+                <p><span class="font-bold">Correo:</span> {{ $transactionmercado->user_email }}</p>
+                <p><span class="font-bold">Order ID:</span> {{ $transactionmercado->collection_id }}</p>
+                <p><span class="font-bold">External Reference:</span> {{ $transactionmercado->external_reference }}</p>
+                <p><span class="font-bold">Productos Totales:</span> {{ $transactionmercado->tasks }}</p>
+                <p><span class="font-bold">Monto Total:</span> ${{ number_format($transactionmercado->total_amount, 2) }}</p>
+                <p><span class="font-bold">Fecha:</span> {{ $transactionmercado->created_at->format('d-m-Y') }}</p>
+                <p class="mt-2 text-lg font-semibold">
+                    <span class="font-bold text-black">Estatus:</span>
+                    <span class="{{ $transactionmercado->status === 'Completado' ? 'text-purple-500' :
+                        ($transactionmercado->status === 'En Espera' ? 'text-yellow-600' :
+                        ($transactionmercado->status === 'Procesando' ? 'text-blue-600' :
+                        ($transactionmercado->status === 'Enviado' ? 'text-green-600' : 'text-red-600')))}}">
+                        {{ $transactionmercado->status }}
+                    </span>
+                </p>
+            </div>
+            @endforeach
+        </div>
+    </div>
+
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">

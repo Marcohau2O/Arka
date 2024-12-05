@@ -9,23 +9,26 @@
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg text-center">
         <div class="mb-6">
-            <h1 class="text-3xl font-bold text-green-500">¡Pago confirmado!</h1>
+            <h1 class="text-lg font-bold text-green-500">¡Pago confirmado!</h1>
             <p class="mt-2 text-gray-700 text-lg">Gracias por tu compra.</p>
         </div>
-        <div class="bg-green-50 p-4 rounded-lg shadow-inner border border-green-200 mb-6">
+        <div class="p-4 mb-6">
             <p class="text-gray-600">
                 Tu número de orden es: 
-                <span class="font-semibold text-green-700">{{ $data['payment_id'] ?? 'No disponible' }}</span>.
+                <span class="font-semibold text-gray-700">{{ $data['payment_id'] ?? 'No disponible' }}</span>.
+            </p>
+            <p class="text-gray-600">
+                Gracias por tu compra:
+                <span class="font-semibold text-gray-700">{{ $user['name'] ?? 'No disponible' }}</span>.
+            </p>
+            <p class="text-gray-600">
+                Correo:
+                <span class="font-semibold text-gray-700">{{ $user['email'] ?? 'No disponible' }}</span>.
             </p>
         </div>
-        <a href="{{ url('/') }}" class="px-6 py-3 bg-blue-500 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <a href="{{ route('inicio') }}" class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
             Volver al Inicio
         </a>
     </div>
-    <script>
-        var paymentId = @json($data['payment_id'] ?? null);
-            //Aqui se mapean el data y con eso vamos a guardarlo en una bse de datos
-        console.log("Payment ID:", paymentId)
-    </script>
 </body>
 </html>

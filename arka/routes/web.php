@@ -58,6 +58,7 @@ Route::get('/admin/administracionUser', [UserController::class, 'administracionU
 Route::get('/admin/administracionVent', [VentasController::class, 'administracionVent'])->name('admin.administracionVent');
 Route::put('/ventas/{id}/update-status', [VentasController::class, 'updateStatus'])->name('ventas.updateStatus');
 Route::put('/ventas/{id}/update-status-paypal', [VentasController::class, 'updateStatusPaypal'])->name('ventas.updateStatusPaypal');
+Route::put('/ventas/{id}/update-status-marcadopago', [VentasController::class, 'updateStatusMercadoPago'])->name('ventas.updateStatusMercadoPago');
 
 //Vista de admin Para los Crud de Productos Esteticos
 Route::resource('admin.productosEs', ProductoController::class);

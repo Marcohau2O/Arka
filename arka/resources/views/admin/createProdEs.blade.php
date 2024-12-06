@@ -71,7 +71,7 @@
                     <label for="image">Imagen:</label>
                     <input type="file" name="image" class="form-control-file" id="image">
                 </div>
-                <button type="submit" class="btn btn-primary" id="agregarProductoBtn">Agregar Producto</button>
+                <button type="submit" class="btn btn-primary m-4" id="agregarProductoBtn">Agregar Producto</button>
             </form>
         </div>
 

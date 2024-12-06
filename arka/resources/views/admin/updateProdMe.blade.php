@@ -73,7 +73,7 @@
                 <img src="{{ asset('storage').'/'.$products->image }}" class="img-thumbnail w-24 h-auto" alt="Product Image" style="width: 200px;">
                 <input type="file" name="image" class="form-control-file" id="image">
             </div>
-            <button type="submit" class="btn btn-primary" id="EditarProductoBtn">Actualizar Producto</button>
+            <button type="submit" class="btn btn-primary m-4" id="EditarProductoBtn">Actualizar Producto</button>
         </form>
     </div>
         

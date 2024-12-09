@@ -89,7 +89,7 @@
           <form>
             <div class="mb-3">
               <label for="nombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="nombre" required>
+              <input type="text" class="form-control" id="nombre" value="{{ old('name', auth()->user()->name) }}" readonly required>
             </div>
             <div class="mb-3">
               <label for="date" class="form-label">date</label>

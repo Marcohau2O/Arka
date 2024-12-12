@@ -88,6 +88,18 @@
         </div>
         <div class="card">
             <div class="card-image"></div>
+            <p class="card-title">Administracion de Reservas</p>
+            <p class="card-body">
+                Esto es ver las Reservas de los usuarios.
+            </p>
+            <p>
+                <button onclick="window.location.href='{{ route('admin.reservaciones') }}'" class="button type1">
+                    <span class="btn-txt">Más Información</span>
+                </button>
+            </p>
+        </div>
+        <div class="card">
+            <div class="card-image"></div>
             <p class="card-title">Productos Esteticos</p>
             <p class="card-body">
                 Esto es para editar todo los productos Esteticos.

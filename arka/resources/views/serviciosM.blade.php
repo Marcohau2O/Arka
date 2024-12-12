@@ -49,6 +49,34 @@
         </ul>
     </nav>
 
+    @if(session('success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: '{{ session('success') }}',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Aceptar'
+                });
+            });
+        </script>
+    @endif
+
+    @if ($errors->any())
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Error!',
+                    html: '<ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'Cerrar'
+                });
+            });
+        </script>
+    @endif
+
     <div class="card-container">
         <div class="card">
             <div class="card-image"></div>
@@ -56,7 +84,7 @@
             <p class="card-body">
                 Nullam ac tristique nulla, at convallis quam. Integer consectetur mi nec magna tristique, non lobortis.
             </p>
-            <p><button class="button type1" data-bs-toggle="modal" data-bs-target="#reservarModal"><span class="btn-txt">Reservar</span></button></p>
+            <p><button class="button type1" data-bs-toggle="modal" data-bs-target="#reservarModal" data-servicio="Vacunas"><span class="btn-txt">Reservar</span></button></p>
         </div>
         <div class="card">
             <div class="card-image"></div>
@@ -64,7 +92,7 @@
             <p class="card-body">
                 Nullam ac tristique nulla, at convallis quam. Integer consectetur mi nec magna tristique, non lobortis.
             </p>
-            <p><button class="button type1" data-bs-toggle="modal" data-bs-target="#reservarModal"><span class="btn-txt">Reservar</span></button></p>
+            <p><button class="button type1" data-bs-toggle="modal" data-bs-target="#reservarModal" data-servicio="Cirugias"><span class="btn-txt">Reservar</span></button></p>
          </div>
         <div class="card">
             <div class="card-image"></div>
@@ -72,7 +100,7 @@
             <p class="card-body">
                 Nullam ac tristique nulla, at convallis quam. Integer consectetur mi nec magna tristique, non lobortis.
             </p>
-            <p><button class="button type1" data-bs-toggle="modal" data-bs-target="#reservarModal"><span class="btn-txt">Reservar</span></button></p>
+            <p><button class="button type1" data-bs-toggle="modal" data-bs-target="#reservarModal" data-servicio="Radiografias"><span class="btn-txt">Reservar</span></button></p>
         </div>
         <!-- Add more cards as needed -->
     </div>
@@ -86,18 +114,20 @@
         </div>
         <div class="modal-body">
           <!-- Contenido del Modal -->
-          <form>
+          <form method="POST" action="{{ route('reservar.store2')}}">
+            @csrf
+            <input type="hidden" id="servicio" name="servicio">
             <div class="mb-3">
               <label for="nombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="nombre" value="{{ old('name', auth()->user()->name) }}" readonly required>
+              <input type="text" class="form-control" name="nombre" value="{{ old('name', auth()->user()->name) }}" readonly>
             </div>
             <div class="mb-3">
               <label for="date" class="form-label">date</label>
-              <input type="date" class="form-control" id="date" required>
+              <input type="date" class="form-control" name="date">
             </div>
             <div class="mb-3">
               <label for="telefono" class="form-label">Teléfono</label>
-              <input type="tel" class="form-control" id="telefono" required>
+              <input type="tel" class="form-control" name="telefono">
             </div>
             <button type="submit" class="btn btn-primary">Reservar</button>
           </form>
@@ -120,5 +150,17 @@
             integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
             crossorigin="anonymous"
         ></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+          const botonesReserva = document.querySelectorAll('button[data-bs-target="#reservarModal"]');
+        
+          botonesReserva.forEach(button => {
+            button.addEventListener('click', function () {
+              const servicio = this.getAttribute('data-servicio');
+              
+              document.getElementById('servicio').value = servicio;
+            });
+          });
+        </script>
     </body>
 </html>

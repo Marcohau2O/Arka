@@ -10,6 +10,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VentasController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MercadoPagoController;
+use App\Http\Controllers\ReservaController;
 
 /*Route::get('/inicio', function () {
     return view('inicio');
@@ -28,6 +29,7 @@ Route::middleware('auth')->group(function () {
 Route::view('/contactanos', 'contactanos')->name('contactanos');
 Route::view('/nosotros', 'nosotros')->name('nosotros');
 Route::get('/Compras', [VentasController::class, 'Ventas'])->name('Compras');
+Route::get('/reservas', [ReservaController::class, 'index'])->name('reservas.index');
 
 Route::get('/serviciosE', function () {
     return view('serviciosE');
@@ -78,6 +80,8 @@ Route::get('admin/edits/{id}', [ProductController::class, 'edits'])->name('admin
 Route::put('admin/edits/{id}', [ProductController::class, 'updates'])->name('admin.updatesProdMe');
 Route::delete('admin/destroys/{id}', [ProductController::class, 'destroys'])->name('admin.destroysProdMe');
 
+Route::get('/admin/reservaciones', [ReservaController::class, 'AdminReservaciones'])->name('admin.reservaciones');
+
 //carrito de Compra 
 Route::post('cart/add', [CartController::class, 'add'])->name('add');
 Route::post('cart/adds', [CartController::class, 'adds'])->name('adds');
@@ -97,4 +101,9 @@ Route::get('/payment-success', [MercadoPagoController::class, 'success'])->name(
 Route::get('/payment-failure', [MercadoPagoController::class, 'failure'])->name('payment.failure');
 Route::get('/payment-pending', [MercadoPagoController::class, 'pending'])->name('payment.pending');
 
+//ruta de reservas
+Route::post('/reservar-estetico', [ReservaController::class, 'store'])->name('reservar.store');
+Route::post('/reservar-medicinal', [ReservaController::class, 'store2'])->name('reservar.store2');
+
+Route::get('/api/admin-reservaciones', [ReservaController::class, 'AdminReservacion']);
 require __DIR__.'/auth.php';
